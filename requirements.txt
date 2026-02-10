@@ -1,0 +1,7 @@
+pyrogram
+tgcrypto
+pytgcalls
+flask
+ffmpeg-python
+requests
+python-telegram-bot==20.7
