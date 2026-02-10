@@ -1,4 +1,4 @@
 pyrogram
 tgcrypto
 yt-dlp
-py-tgcalls>=3.0.0.dev0
+git+https://github.com/pytgcalls/pytgcalls.git
