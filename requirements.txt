@@ -1,7 +1,12 @@
+# Pyrogram و Userbot
 pyrogram==2.0.106
 tgcrypto==1.2.5
-pytgcalls==2.2.1
+pytgcalls==2.1.0
+
+# البوت
+python-telegram-bot==20.7
+
+# مكتبات مساعدة
 flask==3.1.2
 ffmpeg-python==0.2.0
 requests==2.32.5
-python-telegram-bot==20.7
