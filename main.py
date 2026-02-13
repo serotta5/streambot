@@ -2,7 +2,7 @@ import os
 import asyncio
 from pyrogram import Client, filters
 from pytgcalls import PyTgCalls
-from pytgcalls.types import MediaStream
+from pytgcalls.types.input_stream import AudioVideoPiped
 from yt_dlp import YoutubeDL
 
 API_ID = int(os.environ.get("API_ID"))
@@ -11,6 +11,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 app = Client("stream_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 call_py = PyTgCalls(app)
+
 
 @app.on_message(filters.command("play") & filters.group)
 async def stream_video(client, message):
@@ -28,7 +29,7 @@ async def stream_video(client, message):
 
     try:
         ydl_opts = {
-            "format": "best[ext=mp4]",
+            "format": "best",
             "outtmpl": f"downloads/{chat_id}.%(ext)s",
             "noplaylist": True,
             "quiet": True
@@ -40,21 +41,23 @@ async def stream_video(client, message):
 
         await msg.edit_text("🎥 جاري البث الآن...")
 
-        await call_py.play(
+        await call_py.join_group_call(
             chat_id,
-            MediaStream(file_path)
+            AudioVideoPiped(file_path),
         )
 
     except Exception as e:
         await msg.edit_text(f"❌ خطأ: {e}")
 
+
 @app.on_message(filters.command("stop") & filters.group)
 async def stop_stream(client, message):
     try:
-        await call_py.leave_call(message.chat.id)
+        await call_py.leave_group_call(message.chat.id)
         await message.reply_text("✅ تم إيقاف البث.")
     except:
         await message.reply_text("❌ لا يوجد بث حالياً.")
+
 
 async def main():
     await app.start()
@@ -62,6 +65,6 @@ async def main():
     print("Bot Started Successfully")
     await asyncio.Event().wait()
 
+
 if __name__ == "__main__":
     asyncio.run(main())
-
