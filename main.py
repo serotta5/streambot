@@ -18,6 +18,12 @@ app = Client(
 
 call_py = PyTgCalls(app)
 
+# اختبار استقبال الرسائل في الخاص
+@app.on_message(filters.private)
+async def test_private(client, message):
+    print("Private message received:", message.text)
+    await message.reply_text("Test OK ✅")
+
 
 @app.on_message(filters.command("play") & filters.group)
 async def stream_video(client, message):
