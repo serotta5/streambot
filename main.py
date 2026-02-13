@@ -65,6 +65,7 @@ async def stop_stream(client, message):
 
 async def main():
     await app.start()
+    print("Logged in as:", await app.get_me())
     await call_py.start()
     print("Bot Started Successfully")
     await asyncio.Event().wait()
