@@ -1,7 +1,7 @@
 import os
 import asyncio
 from pyrogram import Client, filters
-from pytgcalls import PyTgCalls
+from pytgcalls.pytgcalls import PyTgCalls
 from pytgcalls.types.input_stream import AudioVideoPiped
 from yt_dlp import YoutubeDL
 
